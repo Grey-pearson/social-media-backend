@@ -29,20 +29,20 @@ const ThoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // formate date??
+            // format date || refer to reaction.js
         },
         username: {
             type: String,
             required: true,
         },
-        reactions: [
+        reactions: [ // nested arr of documents created with the reactions schema linked here somehow?
             {
                 type: Schema.Types.ObjectId, // check if this is right
                 ref: 'Reaction',
             },
         ],
     },
-    {
+    {  // see if this is needed
         toJSON: {
             virtuals: true,
         },

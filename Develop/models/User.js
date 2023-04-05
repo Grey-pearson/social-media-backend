@@ -19,33 +19,37 @@
 
 const { Schema, model } = require('mongoose');
 
-const courseSchema = new Schema(
+const userSchema = new Schema(
     {
         username: {
             type: String,
             required: true,
             maxlength: 280,
             minlength: 1,
+            trim: true,
+            unique: true,
         },
         email: {
-            type: Date,
-            default: Date.now,
-            // formate date??
+            type: String,
+            required: true,
+            unique: true,
+            // matching validation
+            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
         },
-        thoughts: [
+        thoughts: [ // an array refrencing id values from the thought model
             {
                 type: Schema.Types.ObjectId, // check if this is right
-                ref: 'Reaction',
+                ref: 'Thought',
             },
         ],
-        friends: [
+        friends: [ // array used the same as thoughts but is self refrencing?
             {
-                type: Schema.Types.ObjectId, // check if this is right
-                ref: 'Reaction',
+                type: Schema.Types._id, // check if this is right
+                ref: 'User',
             },
         ],
     },
-    {
+    { // see if this is needed
         toJSON: {
             virtuals: true,
         },
@@ -53,6 +57,6 @@ const courseSchema = new Schema(
     }
 );
 
-const Course = model('course', courseSchema);
+const User = model('user', userSchema);
 
-module.exports = Course;
+module.exports = User;

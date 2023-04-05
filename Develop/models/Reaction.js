@@ -40,10 +40,10 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // formate date??
+            // formate date?? getter method? get: timeFormatter; function then formats it with json???
         },
     },
-    {
+    {  // see if this is needed
         toJSON: {
             getters: true,
         },
