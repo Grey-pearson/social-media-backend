@@ -49,12 +49,12 @@ const userSchema = new Schema(
             },
         ],
     },
-    { // see if this is needed
-        toJSON: {
-            virtuals: true,
-        },
-        id: false,
-    }
+    // { // see if this is needed
+    //     toJSON: {
+    //         virtuals: true,
+    //     },
+    //     id: false,
+    // }
 );
 
 const User = model('user', userSchema);

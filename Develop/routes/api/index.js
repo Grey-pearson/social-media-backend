@@ -1,5 +1,5 @@
-const thoughtRoutes = require('./studentRoutes')
-const userRoutes = require('./userRoutes')
+const thoughtRoutes = require('./thoughtsRoutes')
+const userRoutes = require('./usersRoutes')
 const reactionsRoutes = require('./reactionsRoutes')
 const friendsRoutes = reqiore('./friendsRoutes.js')
 
