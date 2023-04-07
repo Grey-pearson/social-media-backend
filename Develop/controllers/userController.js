@@ -12,10 +12,10 @@ module.exports = {
             });
     },
     // GET users by id
-    getUserById({ params }, res) {
-        User.findOne({ _id: params.id })
+    getUserById(req, res) {
+        User.findOne({ _id: req.params.id })
             .select('-__v')
-            .then(dbUserData => {
+            .then(dbUserData => { // error
                 if (!dbUserData) {
                     res.status(404).json({ message: 'No user found with this id!' });
                     return;

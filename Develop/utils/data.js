@@ -1,118 +1,134 @@
-const names = [
-  'Aaran',
-  'Aaren',
-  'Aarez',
-  'Aarman',
-  'Aaron',
-  'Aaron-James',
-  'Aarron',
-  'Aaryan',
-  'Aaryn',
-  'Aayan',
-  'Aazaan',
-  'Abaan',
-  'Abbas',
-  'Abdallah',
-  'Abdalroof',
-  'Abdihakim',
-  'Abdirahman',
-  'Abdisalam',
-  'Abdul',
-  'Abdul-Aziz',
-  'Abdulbasir',
-  'Abdulkadir',
-  'Abdulkarem',
-  'Smith',
-  'Jones',
-  'Coollastname',
-  'enter_name_here',
-  'Ze',
-  'Zechariah',
-  'Zeek',
-  'Zeeshan',
-  'Zeid',
-  'Zein',
-  'Zen',
-  'Zendel',
-  'Zenith',
-  'Zennon',
-  'Zeph',
-  'Zerah',
-  'Zhen',
-  'Zhi',
-  'Zhong',
-  'Zhuo',
-  'Zi',
-  'Zidane',
-  'Zijie',
-  'Zinedine',
-  'Zion',
-  'Zishan',
-  'Ziya',
-  'Ziyaan',
-  'Zohaib',
-  'Zohair',
-  'Zoubaeir',
-  'Zubair',
-  'Zubayr',
-  'Zuriel',
-  'Xander',
-  'Jared',
-  'Courtney',
-  'Gillian',
-  'Clark',
-  'Jared',
-  'Grace',
-  'Kelsey',
-  'Tamar',
-  'Alex',
-  'Mark',
-  'Tamar',
-  'Farish',
-  'Sarah',
-  'Nathaniel',
-  'Parker',
-];
+const { User, Thought, Reaction } = require('../models');
 
-const appDescriptions = [
-  'Decision Tracker',
-  'Find My Phone',
-  'Learn Piano',
-  'Starbase Defender',
-  'Tower Defense',
-  'Monopoly Money Manager',
-  'Movie trailers',
-  'Hello world',
-  'Stupid Social Media App',
-  'Notes',
-  'Messages',
-  'Email',
-  'Compass',
-  'Firefox',
-  'Running app',
-  'Cooking app',
-  'Poker',
-  'Deliveries',
-];
+// data for username, email, sencentes for thoughts and reactions
 
-// Get a random item given an array
-const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+// only example text
+const username = [
+    'Aaran',
+    'Aaren',
+    'Aarez',
+    'Aarman',
+    'Aaron',
+    'Aaron-James',
+    'Aarron',
+    'Aaryan',
+    'Aaryn',
+    'Aayan',
+    'Aazaan',
+    'Abaan',
+    'Abbas',
+    'Abdallah',
+    'Abdalroof',
+    'Abdihakim',
+    'Abdirahman',
+    'Abdisalam',
+    'Abdul',
+    'Abdul-Aziz',
+    'Abdulbasir',
+    'Abdulkadir',
+    'Abdulkarem',
+    'Smith',
+    'Jones',
+    'Coollastname',
+    'enter_name_here',
+    'Ze',
+    'Zechariah',
+    'Zeek',
+    'Zeeshan',
+    'Zeid',
+    'Zein',
+    'Zen',
+    'Zendel',
+    'Zenith',
+    'Zennon',
+    'Zeph',
+    'Zerah',
+    'Zhen',
+    'Zhi',
+    'Zhong',
+    'Zhuo',
+    'Zi',
+    'Zidane',
+    'Zijie',
+    'Zinedine',
+    'Zion',
+    'Zishan',
+    'Ziya',
+    'Ziyaan',
+    'Zohaib',
+    'Zohair',
+    'Zoubaeir',
+    'Zubair',
+    'Zubayr',
+    'Zuriel',
+    'Xander',
+    'Jared',
+    'Courtney',
+    'Gillian',
+    'Clark',
+    'Jared',
+    'Grace',
+    'Kelsey',
+    'Tamar',
+    'Alex',
+    'Mark',
+    'Tamar',
+    'Farish',
+    'Sarah',
+    'Nathaniel',
+    'Parker',
+]
 
-// Gets a random full name
-const getRandomName = () =>
-  `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+const email = [
+    'ntegrity@verizon.net',
+    'hahsler@live.com',
+    'josem@hotmail.com',
+    'mrsam@verizon.net',
+    'dprice@hotmail.com',
+    'philb@aol.com',
+    'irving@aol.com',
+    'saridder@outlook.com',
+    'jbearp@yahoo.com',
+    'fwitness@icloud.com',
+    'richard@yahoo.com',
+    'rcwil@verizon.net',
+]
 
-// Function to generate random assignments that we can add to student object.
-const getRandomAssignments = (int) => {
-  const results = [];
-  for (let i = 0; i < int; i++) {
-    results.push({
-      assignmentName: getRandomArrItem(appDescriptions),
-      score: Math.floor(Math.random() * (99 - 70 + 1) + 70),
-    });
-  }
-  return results;
-};
+// only example text
+const sentences = [
+    'Can we go to the park.',
+    'Where is the orange cat? Said the big black dog.',
+    'We can make the bird fly away if we jump on something.',
+    'We can go down to the store with the dog. It is not too far away.',
+    'My big yellow cat ate the little black bird.',
+    'I like to read my book at school.',
+    'We are going to swim at the park.'
+]
 
-// Export the functions for use in seed.js
-module.exports = { getRandomName, getRandomAssignments };
+const randomItems = (Array) => arr[Math.floor(Math.random() * arr.length)]
+
+// create only required model for each,
+
+
+// create req user, for each user, create random thought, with random reaction, then add random friend to user
+
+const randomUser = () => {
+
+    const userData = []
+    const thoughtData = []
+    for (let i = 0; i < 10; i++) {
+        userData.push([{
+            username: username[Math.floor(Math.random() * username.length)],
+            email: email[Math.floor(Math.random() * email.length)],
+            thoughts: [],
+            friends: [],
+        }])
+    }
+
+    userData.forEach(user => {
+
+        console.log(user)
+    })
+}
+
+module.exports = { randomUser }

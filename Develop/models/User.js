@@ -44,17 +44,17 @@ const userSchema = new Schema(
         ],
         friends: [ // array used the same as thoughts but is self refrencing?
             {
-                type: Schema.Types._id, // check if this is right
+                type: Schema.Types.ObjectId, // check if this is right
                 ref: 'User',
             },
         ],
     },
-    // { // see if this is needed
-    //     toJSON: {
-    //         virtuals: true,
-    //     },
-    //     id: false,
-    // }
+    { // see if this is needed
+        toJSON: {
+            virtuals: true,
+        },
+        id: false,
+    }
 );
 
 const User = model('user', userSchema);

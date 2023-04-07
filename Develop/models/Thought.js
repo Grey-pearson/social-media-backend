@@ -30,6 +30,7 @@ const ThoughtSchema = new Schema(
             type: Date,
             default: Date.now,
             // format date || refer to reaction.js
+            // dayjs format, in line
         },
         username: {
             type: String,
