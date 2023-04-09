@@ -17,6 +17,7 @@
 
 
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction');
 
 const ThoughtSchema = new Schema(
     {
@@ -36,12 +37,7 @@ const ThoughtSchema = new Schema(
             type: String,
             required: true,
         },
-        reactions: [ // nested arr of documents created with the reactions schema linked here somehow?
-            {
-                type: Schema.Types.ObjectId, // check if this is right
-                ref: 'Reaction',
-            },
-        ],
+        reactions: [reactionSchema],
     },
     {  // see if this is needed
         toJSON: {

@@ -1,17 +1,9 @@
-GIVEN a social network API
+## Social Media Backend
 
-WHEN I enter the command to invoke the application
+this is a backend app indended to be used with a social media app that has user profiles, thoughts/posts, and reactions/comments
 
-THEN my server is started and the Mongoose models are synced to the MongoDB database
+### Features
 
-WHEN I open API GET routes in Insomnia for users and thoughts
+ability to create new user profiles that make sure users credentials are unique, ability to create thoughts(posts) that connect to the user model, and reactions(comments) that run throught the reaction schema to create an array of comments.
 
-THEN the data for each of these routes is displayed in a formatted JSON
-
-WHEN I test API POST, PUT, and DELETE routes in Insomnia
-
-THEN I am able to successfully create, update, and delete users and thoughts in my database
-
-WHEN I test API POST and DELETE routes in Insomnia
-
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+[video tutorial demonstrates how it works](video)

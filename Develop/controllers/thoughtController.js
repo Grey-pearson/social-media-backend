@@ -28,24 +28,30 @@ module.exports = {
             });
     },
     // post; create new thought and add to users data
-    createThought({ params, body }, res) {
-        Thought.create(body)
-            .then(({ userId }) => {
-                return User.findOneAndUpdate(
-                    { userId: params.userId },
-                    { $push: { thoughts: userId } },
-                    { new: true }
-                );
-            })
-            .then(dbUserData => {
-                if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id!' });
-                    return;
+    async createThought(req, res) {
+        try {
+            const thoughtText = req.body.thoughtText;
+            const username = req.body.username;
+            const newThoughts = await Thought.create({
+                thoughtText: thoughtText,
+                username: username,
+            });
+            const userUpdate = await User.findOneAndUpdate(
+                {
+                    username: username
+                },
+                {
+                    $push: {
+                        thoughts: [newThoughts]
+                    }
                 }
-                res.json(dbUserData);
-            })
-            .catch(err => res.json(err));
+            );
+            res.json(newThoughts);
+        } catch (error) {
+            res.status(500).json({ error })
+        }
     },
+
     // put; edit thought by id
     updateThought({ params, body }, res) {
         Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
@@ -85,15 +91,12 @@ module.exports = {
     // get, post, put, delete for reactions
 
     // post; create new unique Reaction
-    createReaction({ params, body }, res) {
-        Reaction.create(body)
-            .then(({ _id }) => {
-                return User.findOneAndUpdate(// make it does this for the thought too
-                    { _id: params.userId },
-                    { $push: { reactions: _id } },
-                    { new: true }
-                );
-            })
+    createReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $push: { reactions: req.body } },
+            { new: true }
+        )
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'No user found with this id!' });
@@ -103,15 +106,21 @@ module.exports = {
             })
             .catch(err => res.json(err));
     },
+
+
     // delete; reaction from thought
-    deleteReaction({ params }, res) {
-        Reaction.findOneAndDelete({ _id: params.reactionId })
-            .then(dbReactionData => {
-                if (!dbReactionData) {
-                    res.status(404).json({ message: 'No reaction found with this id!' });
+    deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionsId: req.params.reactionsId } } },
+            { new: true }
+        )
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
-                res.json(dbReactionData);
+                res.json(dbUserData);
             })
             .catch(err => res.json(err));
     }
